@@ -1,2 +1,41 @@
 # Ignored by default
 /node_modules/*
+package-lock.json
+
+# Image
+*.svg
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.bmp
+*.tiff
+*.ico
+
+# Production
+dist/
+/cloud/functions/
+CHANGELOG.md
+
+# Test
+coverage/
+
+# Other
+.editorconfig
+.eslintignore
+.gitignore
+.npmignore
+.markdownlintignore
+.prettierignore
+
+.nvmrc
+.yarnrc
+yarn.lock
+
+*.sh
+*.log
+*.snap
+**/*.yml
+.DS_Store
+robots.txt
+LICENSE

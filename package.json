@@ -13,7 +13,7 @@
     "lint:fix": "npm run lint -- --fix",
     "prettier": "prettier --check '**/*.{html,css,less,md,json}'",
     "prettier:fix": "prettier --write '**/*.{html,css,less,md,json}'",
-    "markdownlint": "markdownlint **/*.md --ignore node_modules --ignore CHANGELOG.md",
+    "markdownlint": "markdownlint \"**/*.md\" --ignore node_modules --ignore CHANGELOG.md",
     "markdownlint:fix": "markdownlint **/*.md --fix --ignore node_modules",
     "start": "webpack-dev-server --config build/webpack.dev.conf.js",
     "build:dev": "webpack --config build/webpack.prod.conf.js",

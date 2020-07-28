@@ -11,7 +11,8 @@ module.exports = {
     'rule-empty-line-before': [
       'always',
       {
-        severity: 'error'
+        severity: 'error',
+        ignore: ['after-comment', 'first-nested', 'inside-block']
       }
     ],
     'no-missing-end-of-source-newline': true
