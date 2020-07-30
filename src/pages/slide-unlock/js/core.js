@@ -1,4 +1,11 @@
-import utils from '../../../utils/index'
+import {
+  $,
+  h,
+  isFunction,
+  bindEvents,
+  unbindEvents,
+  throttle
+} from '../../../utils'
 
 /**
  * Class implement slide verification.
@@ -12,7 +19,7 @@ class SlideUnlock {
    * @param {object} options 配置项
    */
   constructor(selectors = 'body', options = {}) {
-    this.$el = utils.$(selectors)
+    this.$el = $(selectors)
     this.$$isSuccess = false
     this.$options = {
       tip: '请按住滑块，拖动到最右边',
@@ -30,13 +37,11 @@ class SlideUnlock {
    * @returns {void}
    */
   init() {
-    this.$$root = utils.h('div', { class: 'slide-track' })
-    this.$$bg = this.$$root.appendChild(utils.h('div', { class: 'slide-bg' }))
-    this.$$block = this.$$root.appendChild(
-      utils.h('div', { class: 'slide-block' })
-    )
+    this.$$root = h('div', { class: 'slide-track' })
+    this.$$bg = this.$$root.appendChild(h('div', { class: 'slide-bg' }))
+    this.$$block = this.$$root.appendChild(h('div', { class: 'slide-block' }))
     this.$$text = this.$$root.appendChild(
-      utils.h('p', { class: 'slide-text' }, this.$options.tip)
+      h('p', { class: 'slide-text' }, this.$options.tip)
     )
     this.$el.insertBefore(this.$$root, this.$el.firstChild)
     this._bindEvents()
@@ -50,12 +55,12 @@ class SlideUnlock {
    * @returns {void}
    */
   _bindEvents() {
-    utils.bindEvents(
+    bindEvents(
       'mousedown touchstart',
       (this.$$handleMouseDown = this._handleMouseDown.bind(this)),
       this.$$block
     )
-    utils.bindEvents(
+    bindEvents(
       'mouseup touchend',
       (this.$$handleMouseUp = this._handleMouseUp.bind(this)),
       document
@@ -85,9 +90,9 @@ class SlideUnlock {
     this.$$bg.style.transition = ''
     this.$$block.style.transition = ''
 
-    utils.bindEvents(
+    bindEvents(
       'mousemove touchmove',
-      (this.$$handleMouseMove = utils.throttle(
+      (this.$$handleMouseMove = throttle(
         this._handleMouseMove,
         this,
         undefined,
@@ -134,7 +139,7 @@ class SlideUnlock {
       this.$$text.textContent = this.$options.unlockText
       this.$$text.style.cssText = `color: #fff; left: 0; right: ${this.$$block.offsetWidth}px;`
       this.$$block.classList.add('success')
-      if (utils.isFunction(this.$options.cb)) {
+      if (isFunction(this.$options.cb)) {
         this.$options.cb.call(this)
       }
     }
@@ -150,19 +155,11 @@ class SlideUnlock {
    */
   _handleMouseUp() {
     clearTimeout(this.$$tId)
-    utils.unbindEvents(
-      'mousemove touchmove',
-      this.$$handleMouseMove,
-      this.$$block
-    )
+    unbindEvents('mousemove touchmove', this.$$handleMouseMove, this.$$block)
 
     if (this.$$isSuccess) {
-      utils.unbindEvents('mouseup touchend', this.$$handleMouseUp, document)
-      utils.unbindEvents(
-        'mousedown touchstart',
-        this.$$handleMouseDown,
-        this.$$block
-      )
+      unbindEvents('mouseup touchend', this.$$handleMouseUp, document)
+      unbindEvents('mousedown touchstart', this.$$handleMouseDown, this.$$block)
       return
     }
 
