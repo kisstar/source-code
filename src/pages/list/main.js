@@ -1,3 +1,4 @@
+import { setUserTheme } from '@utils/app'
 import '@styles/index.less'
 import './index.less'
 
@@ -6,3 +7,5 @@ if (process.env.NODE_ENV !== 'production') {
   require('./index.html')
 }
 /* eslint-enable global-require */
+
+setUserTheme()
