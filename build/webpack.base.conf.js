@@ -137,9 +137,7 @@ module.exports = {
   entry: entryMap,
   output: {
     // fix: https://github.com/webpack/webpack-dev-server/issues/1591
-    publicPath: isDev
-      ? 'http://localhost:8888/'
-      : 'https://kisstar.github.io/source-code/',
+    publicPath: isDev ? 'http://localhost:8888/' : '/source-code',
     path: resolve('dist'),
     filename: isDev ? '[name]/main.js' : '[name]/main.[chunkhash:8].js',
     chunkFilename: isDev

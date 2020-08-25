@@ -21,7 +21,9 @@
     "commit": "git cz",
     "release": "standard-version",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d dist"
+    "deploy:gitee": "gh-pages -d dist -b master -r https://gitee.com/dongwanhong/source-code.git",
+    "deploy:github": "gh-pages -d dist -b gh-pages -r https://github.com/kisstar/source-code.git",
+    "deploy": "npm run deploy:gitee && npm run deploy:github"
   },
   "repository": {
     "type": "git",
